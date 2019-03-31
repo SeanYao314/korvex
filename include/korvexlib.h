@@ -1,5 +1,5 @@
-#include "main.h"
 #include "okapi/api.hpp"
+#include "main.h"
 
 #pragma
 // ports for motors
@@ -17,7 +17,7 @@ const int CAPFLIP_MTR = 8;
 // flywheel and intake motors
 const int FLY_MTR1 = 9;
 const int FLY_MTR2 = 10;
-const int INTAKE_MTR = 6;
+const int INTAKE_MTR = 20;
 
 // sensors
 const int TRIGGER_BL = 1;

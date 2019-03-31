@@ -26,7 +26,7 @@ const int FLY_PRESETS[2][3] = {
 };
 const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 
-const int CAPFLIP_PRESETS[4] = {0, -450, -565, -700};
+const int CAPFLIP_PRESETS[4] = {0, -450, -550, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
 // globals
@@ -108,12 +108,12 @@ void opcontrol()
 			}
 			capflipTarget = CAPFLIP_PRESETS[capflipIterate];
 			controllerPros.print(0, 0, "Cap Tar: %d", capflipTarget);
-			capflipMotor.move_absolute(capflipTarget, 150);
+			capflipMotor.move_absolute(capflipTarget, 200);
 		}
 		else if (controllerPros.get_digital_new_press(DIGITAL_Y)) // reset capflip
 		{
 			capflipIterate = 0;
-			capflipMotor.move_absolute(0, 150);
+			capflipMotor.move_absolute(0, 200);
 		}
 
 		// intake control
