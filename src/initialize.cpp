@@ -68,7 +68,10 @@ static lv_res_t parkBtnAction(lv_obj_t *btn)
 	uint8_t id = lv_obj_get_free_num(btn);
 
 	printf("Btn %d is long pressed %d\n", btn);
-	autonPark = false;
+
+	auto btn_state = lv_btn_get_state(btn);
+
+	autonPark = btn_state == LV_BTN_STATE_TGL_PR;
 
 	return LV_RES_OK;
 }
@@ -99,6 +102,7 @@ void initialize()
 	// button matrix
 	lv_obj_t *redBtnm = lv_btnm_create(redTab, NULL);
 	lv_btnm_set_map(redBtnm, btnmMap);
+	lv_btnm_set_toggle(redBtnm, true, 0);
 	lv_btnm_set_action(redBtnm, redBtnmAction);
 	lv_obj_set_size(redBtnm, 450, 50);
 	lv_obj_set_pos(redBtnm, 0, 100);
@@ -109,6 +113,7 @@ void initialize()
 	lv_obj_t *redBtn1Label = lv_label_create(redBtn1, NULL);
 	lv_label_set_text(redBtn1Label, "Park");
 	lv_btn_set_action(redBtn1, LV_BTN_ACTION_LONG_PR, parkBtnAction);
+	lv_btn_set_toggle(redBtn1, true);
 	lv_obj_set_size(redBtn1, 100, 40);
 	lv_obj_set_pos(redBtn1, 0, 200);
 	lv_obj_align(redBtn1, NULL, LV_ALIGN_CENTER, 0, 0);
@@ -116,6 +121,7 @@ void initialize()
 	// blue tab
 	lv_obj_t *blueBtnm = lv_btnm_create(blueTab, NULL);
 	lv_btnm_set_map(blueBtnm, btnmMap);
+	lv_btnm_set_toggle(blueBtnm, true, 0);
 	lv_btnm_set_action(blueBtnm, blueBtnmAction);
 	lv_obj_set_size(blueBtnm, 450, 50);
 	lv_obj_set_pos(blueBtnm, 0, 100);
@@ -126,6 +132,7 @@ void initialize()
 	lv_obj_t *blueBtn1Label = lv_label_create(blueBtn1, NULL);
 	lv_label_set_text(blueBtn1Label, "Park");
 	lv_btn_set_action(blueBtn1, LV_BTN_ACTION_LONG_PR, parkBtnAction);
+	lv_btn_set_toggle(blueBtn1, true);
 	lv_obj_set_size(blueBtn1, 100, 40);
 	lv_obj_set_pos(blueBtn1, 0, 200);
 	lv_obj_align(blueBtn1, NULL, LV_ALIGN_CENTER, 0, 0);
