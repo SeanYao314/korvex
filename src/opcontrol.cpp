@@ -128,16 +128,16 @@ void opcontrol()
 
 			// if theres a ball at the top we want to pull it down back to the trigger
 			// let the bot ball go a little higher
-			intakeMotor.move_relative(600, 200);
+			// intakeMotor.move_relative(600, 200);
 
 			timeHold = pros::millis();
-			while (timeHold + 400 > pros::millis())
+			while (timeHold + 700 > pros::millis())
 			{
 				chassis.tank((controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * 0.00787401574),
 							 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 0.00787401574);
 				pros::delay(20);
 			}
-			intakeMotor.move_relative(-500, 200);
+			intakeMotor.move_relative(-350, 200);
 
 			// start flywheel and the ball gets like 'sucked down' so we need to pull it down a bit further than the normal loop would allow
 			timeHold = pros::millis();
@@ -323,10 +323,10 @@ void opcontrol()
 					pros::delay(20);
 				}
 				// shoot 2nd ball
-				intakeMotor.move_relative(1200, 200);
+				intakeMotor.move_relative(2200, 200);
 				// wait for second ball to get shot
 				chassis.tank(0, 0);
-				pros::delay(400);
+				pros::delay(600);
 
 				// cleanup
 				ballTriggerTop = false; // we are shooting the balls so they gone
