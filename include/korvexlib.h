@@ -5,7 +5,7 @@
 // ports for motors
 
 // chassis motors
-const int LEFT_MTR1 = 5;
+const int LEFT_MTR1 = 1;
 const int LEFT_MTR2 = 2;
 const int RIGHT_MTR1 = 3;
 const int RIGHT_MTR2 = 4;

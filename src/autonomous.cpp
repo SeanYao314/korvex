@@ -101,8 +101,10 @@ void autonomous()
     {
     case 5: // test
         chassis.setMaxVelocity(130);
-        chassis.turnAngle(-90_deg);
-        chassis.turnAngle(90_deg);
+        // chassis.turnAngle(-90_deg);
+        // chassis.turnAngle(90_deg);
+        
+        chassis.moveDistance(72_in);
         break;
     case 0: // skills 18
         chassis.setMaxVelocity(130);
