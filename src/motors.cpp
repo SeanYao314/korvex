@@ -2,12 +2,6 @@
 #include "okapi/api.hpp"
 #include "korvexlib.h"
 
-// motors
-pros::Motor chassisLeft1(LEFT_MTR1, pros::E_MOTOR_GEARSET_18, false);
-pros::Motor chassisLeft2(LEFT_MTR2, pros::E_MOTOR_GEARSET_18, false);
-pros::Motor chassisRight1(RIGHT_MTR1, pros::E_MOTOR_GEARSET_18, false);
-pros::Motor chassisRight2(RIGHT_MTR2, pros::E_MOTOR_GEARSET_18, false);
-
 okapi::MotorGroup flywheelController({-FLY_MTR1, -FLY_MTR2});
 pros::Motor intakeMotor(INTAKE_MTR, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor capflipMotor(CAPFLIP_MTR, pros::E_MOTOR_GEARSET_18, false);
@@ -35,10 +29,3 @@ okapi::ChassisControllerPID chassis = okapi::ChassisControllerFactory::create(
     AbstractMotor::gearset::green, // normal gearset
     {4_in, 12.5_in}                // 4 inch wheels, 12.5 inch wheelbase width
 );
-auto myChassis = ChassisControllerFactory::create(
-    {5, 2}, {3,4},
-    AbstractMotor::gearset::green,
-    {4_in, 12.5_in}
-);
-
-okapi::ADIGyro gyro(1, 1); // port, multiplier

@@ -128,7 +128,8 @@ void opcontrol()
 
 			// if theres a ball at the top we want to pull it down back to the trigger
 			// let the bot ball go a little higher
-			intakeMotor.move_relative(400, 200);
+			intakeMotor.move_relative(600, 200);
+
 			timeHold = pros::millis();
 			while (timeHold + 400 > pros::millis())
 			{
@@ -433,7 +434,7 @@ void opcontrol()
 		// std::cout << capflipMotor.get_position() << std::endl;
 		// std::cout << "temp " << flywheelController.getTemperature() << std::endl;
 		// std::cout << "eff " << flywheelController.getEfficiency() << std::endl;
-		std::cout << "gyro " << gyro.get() << std::endl;
+		// std::cout << "gyro " << gyro.get() << std::endl;
 		// std::cout << "temp " << intakeMotor.get_temperature() << std::endl;
 		// std::cout << "eff " << intakeMotor.get_efficiency() << std::endl;
 		// if (triggerBR.get_value())
@@ -455,7 +456,7 @@ void opcontrol()
 
 		// chassis control
 		chassis.tank((controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * 0.00787401574),
-					 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * -0.00787401574);
+					 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 0.00787401574);
 
 		// final flywheel stuff
 		flywheelController.moveVelocity(flywheelTarget);

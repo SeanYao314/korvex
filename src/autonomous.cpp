@@ -90,8 +90,7 @@ void autonomous()
 {
     int autonStart = pros::millis(); // note the start time
     chassis.resetSensors();
-    gyro.reset();
-    int auton = -3;
+    int auton = 5;
 
     if (autonSelection != 10)
     {
