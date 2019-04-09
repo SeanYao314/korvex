@@ -29,6 +29,9 @@ const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 const int CAPFLIP_PRESETS[4] = {0, -450, -550, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
+const int TRACKER_HIGH_THRESHOLD = 800;
+const int TRACKER_LOW_THRESHOLD = 300;
+
 // globals
 int flywheelTarget = 0;
 int flywheelAvgErr = 0;
@@ -66,6 +69,16 @@ void isFlySpunUpCheck(void *)
 		flywheelAvgErr = averageErr; // give global this so we can make sure we arent burning the flywheel
 		pros::delay(50);
 	}
+}
+
+bool isBallTouchBottomSensor() {
+	// return triggerBL.get_new_press() || triggerBR.get_new_press();
+	return trackerLow.get_value() < TRACKER_LOW_THRESHOLD;
+}
+
+bool isBallTouchUpperSensor() {
+	//return triggerTL.get_new_press() || triggerTR.get_new_press();
+	return trackerHigh.get_value() < TRACKER_HIGH_THRESHOLD;
 }
 
 void opcontrol()
@@ -121,7 +134,7 @@ void opcontrol()
 		// check sensors
 		// get new press from either side of bottom, ensure intake is on and there is no ball already there to remove false positives
 		// we also do not want to stop the intake if theres no ball at the top, as the default position should be top
-		if ((triggerBL.get_new_press() || triggerBR.get_new_press()) && intakeToggle == true && ballTriggerBottom == false && ballTriggerTop == true)
+		if (isBallTouchBottomSensor() && intakeToggle == true && ballTriggerBottom == false && ballTriggerTop == true)
 		{
 			// printf("bot triggered\n");
 			controllerPros.rumble("-");
@@ -155,7 +168,7 @@ void opcontrol()
 		}
 
 		// get new press from either side of top, ensure intake is on and there is no ball already there to remove false positives
-		if ((triggerTL.get_new_press() || triggerTR.get_new_press()) && intakeToggle == true && ballTriggerTop == false)
+		if (isBallTouchUpperSensor() && intakeToggle == true && ballTriggerTop == false)
 		{
 			// printf("top triggered\n");
 			controllerPros.rumble(".");
@@ -166,11 +179,11 @@ void opcontrol()
 
 		// make sure to update values on sensor state change
 		// ensure that neither sensor is pushed, if so, tell the bot that the ball is no longer in position
-		if (!triggerBL.get_value() && !triggerBR.get_value() && intakeToggle == false)
+		if (!isBallTouchBottomSensor() && intakeToggle == false)
 		{
 			ballTriggerBottom = false;
 		}
-		if (!triggerTL.get_value() && !triggerTR.get_value() && intakeToggle == false)
+		if (!isBallTouchUpperSensor() && intakeToggle == false)
 		{
 			ballTriggerTop = false;
 		}
@@ -466,7 +479,7 @@ void opcontrol()
 		if (flywheelLastTarg != 0 && flywheelTarget == 0) // the flywheel just got set to 0						   
 			flywheelOffTime = pros::millis(); // store when we turned the flywheel off
 
-		if (flywheelOffTime + 1600 > pros::millis() && (triggerTL.get_value() || triggerTR.get_value()) && cycles > 100) // cycles over 100 bcuz false positive at start
+		if (flywheelOffTime + 1600 > pros::millis() && isBallTouchUpperSensor() && cycles > 100) // cycles over 100 bcuz false positive at start
 			intakeMotor.move_velocity(0); // stop the intake if flywheel is spinning down
 
 		// storage of whatever

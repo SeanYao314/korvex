@@ -24,6 +24,11 @@ const int TRIGGER_BL = 1;
 const int TRIGGER_BR = 2;
 const int TRIGGER_TL = 3;
 const int TRIGGER_TR = 4;
+
+// line track sensor
+const int TRACK_HIGH = 5;
+const int TRACK_LOW  = 6;
+
 //vision
 // auton
 extern int autonSelection;
@@ -53,3 +58,7 @@ extern pros::ADIDigitalIn triggerTR;
 extern okapi::ChassisControllerPID chassis;
 extern okapi::IterativePosPIDController liftControllerPID;
 extern okapi::ADIGyro gyro;
+
+// tracker sensor
+extern pros::ADIAnalogIn trackerHigh;
+extern pros::ADIAnalogIn trackerLow;

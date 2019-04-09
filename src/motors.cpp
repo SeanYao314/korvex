@@ -12,6 +12,9 @@ pros::ADIDigitalIn triggerBR(TRIGGER_BR);
 pros::ADIDigitalIn triggerTL(TRIGGER_TL);
 pros::ADIDigitalIn triggerTR(TRIGGER_TR);
 
+pros::ADIAnalogIn trackerHigh(TRACK_HIGH);
+pros::ADIAnalogIn trackerLow(TRACK_LOW);
+
 // other
 pros::Controller controllerPros(pros::E_CONTROLLER_MASTER);
 
