@@ -657,17 +657,19 @@ void autonomous()
 
         intakeMotor.move_velocity(200);
         chassis.moveDistance(37_in); // going to cap with ball under it
-        chassis.moveDistanceAsync(-36_in);
+        chassis.moveDistanceAsync(-39.5_in);
 
         // wait until we intake ball to bot
         timeHold = pros::millis();
-        while (!(triggerBL.get_new_press() || triggerBR.get_new_press()))
+        while (!isBallTouchBottomSensor())
         {
             pros::delay(20);
         }
 
         // theres a ball at the top, we want to pull it down back to the trigger
         intakeMotor.move_relative(500, 200);
+
+        pros::delay(300);
 
         // theres a ball at the top, we want to pull it down back to the trigger
         intakeMotor.move_relative(-400, 200);
@@ -679,8 +681,8 @@ void autonomous()
         chassis.waitUntilSettled();
 
         // aim for flag
-        chassis.turnAngle(-75_deg);
-        chassis.moveDistance(-5_in);
+        chassis.turnAngle(-85_deg);
+        chassis.moveDistance(10.5_in);
 
         // shoot first ball when ready
         while (!(flywheelController.getActualVelocity() > 575))
@@ -734,14 +736,14 @@ void autonomous()
         chassis.moveDistanceAsync(5_in);
 
         // wait for first ball to get to top pos
-        while (!(triggerTL.get_value() || triggerTR.get_value()))
+        while (!isBallTouchUpperSensor())
         {
             pros::delay(20);
         }
 
         // wait for second ball to get to bot pos
         timeHold = pros::millis();
-        while (!(triggerBL.get_value() || triggerBR.get_value()) && (timeHold + 5000 > pros::millis()))
+        while (!isBallTouchBottomSensor() && (timeHold + 5000 > pros::millis()))
         {
             pros::delay(20);
         }

@@ -62,3 +62,6 @@ extern okapi::ADIGyro gyro;
 // tracker sensor
 extern pros::ADIAnalogIn trackerHigh;
 extern pros::ADIAnalogIn trackerLow;
+
+bool isBallTouchBottomSensor();
+bool isBallTouchUpperSensor();
