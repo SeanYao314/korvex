@@ -29,7 +29,7 @@ const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 const int CAPFLIP_PRESETS[4] = {0, -450, -550, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
-const int TRACKER_HIGH_THRESHOLD = 800;
+const int TRACKER_HIGH_THRESHOLD = 300;
 const int TRACKER_LOW_THRESHOLD = 300;
 
 // globals
@@ -267,7 +267,7 @@ void opcontrol()
 		if (flyArmed == 1 && isFlySpunUp == true && flywheelTarget != 0) // shoot one ball
 		{
 			chassis.tank(0, 0);
-			intakeMotor.move_relative(800, 200);
+			intakeMotor.move_relative(3000, 200);
 			intakeToggle = true;
 			ballTriggerTop = false; // we are shooting this ball so its gone
 
@@ -276,14 +276,14 @@ void opcontrol()
 			if (ballTriggerBottom == true)
 			{
 				timeHold = pros::millis();
-				while (isFlySpunUp == false && !(timeHold + 800 < pros::millis()))
+				while (isFlySpunUp == false && !(timeHold + 4000 < pros::millis()))
 				{
 					pros::delay(20);
 				}
 			}
 			else
 			{
-				pros::delay(200);
+				pros::delay(400);
 			}
 			// disarm flywheel
 			flyArmed = 0;

@@ -31,7 +31,7 @@ void auton_red_close() {
     chassis.waitUntilSettled();
 
     // aim for flag
-    chassis.turnAngle(-85_deg);
+    chassis.turnAngle(-83.5_deg);
     chassis.moveDistance(10.5_in);
 
     // shoot first ball when ready
@@ -39,17 +39,17 @@ void auton_red_close() {
     {
         pros::delay(20);
     }
-    intakeMotor.move_relative(1400, 200);
+    intakeMotor.move_relative(1000, 200);
 
     // wait for first ball to get shot
     timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 430) && (timeHold + 300 > pros::millis()))
+    while (!(flywheelController.getActualVelocity() <= 450) && (timeHold + 700 > pros::millis()))
     {
         pros::delay(20);
     }
 
     // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(430);
+    flywheelController.moveVelocity(450);
 
     // wait for spinup
     pros::delay(400);
@@ -62,28 +62,28 @@ void auton_red_close() {
     flywheelController.moveVelocity(0);
 
     // flip bot flag
-    chassis.turnAngle(-8_deg);
+    chassis.turnAngle(-7.5_deg);
     chassis.moveDistance(50_in);
 
     // move back for scrape
     chassis.setMaxVelocity(180);
-    chassis.moveDistance(-35_in);
+    chassis.moveDistance(-40_in);
 
     // turn to scrape cap
     flywheelController.moveVelocity(550); // feed-through shot velocity
-    chassis.turnAngle(50_deg);
+    chassis.turnAngle(57.5_deg);
 
     // move to cap
-    chassis.moveDistance(18_in);
+    chassis.moveDistance(12_in);
 
     // scrape
-    capflipMotor.move_absolute(-530, 200);
+    capflipMotor.move_absolute(-550, 200);
     intakeMotor.move_velocity(200);
     pros::delay(200);
     chassis.moveDistance(-10_in);
-    chassis.turnAngle(10_deg);
+    chassis.turnAngle(-17.5_deg);
     capflipMotor.move_absolute(0, 200);
-    chassis.moveDistanceAsync(5_in);
+    chassis.moveDistanceAsync(10_in);
 
     // wait for first ball to get to top pos
     while (!isBallTouchUpperSensor())
