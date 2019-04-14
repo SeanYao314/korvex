@@ -143,7 +143,7 @@ class Motor {
 	 * \return 1 if the operation was successful or PROS_ERR if the operation
 	 * failed, setting errno.
 	 */
-	virtual std::int32_t move_relative(const double position, const std::int32_t velocity) const;
+virtual std::int32_t move_relative(const double position, const std::int32_t velocity) const;
 
 	/**
 	 * Sets the velocity for the motor.
