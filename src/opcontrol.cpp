@@ -21,12 +21,12 @@ using namespace okapi;
 
 // 3 for 0, second, and third flag
 const int FLY_PRESETS[2][3] = {
-	{0, 580, 430}, // close
-	{0, 550, 510}, // full
+	{0, 560, 410}, // close
+	{0, 550, 530}, // full
 };
 const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 
-const int CAPFLIP_PRESETS[4] = {0, -450, -550, -750};
+const int CAPFLIP_PRESETS[4] = {0, -500, -550, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
 const int TRACKER_HIGH_THRESHOLD = 300;
@@ -215,15 +215,15 @@ void opcontrol()
 		// flywheel preset switcher (revamped again)
 		if (controllerPros.get_digital_new_press(DIGITAL_LEFT)) // toggle fly preset
 		{
-			if (shootingPosition != 0)
+			if (shootingPosition = 0)
 			{ // set to close shot
-				shootingPosition = 0;
+				shootingPosition = 1;
 				controllerPros.rumble("...");
 			}
 			else
 			{ // set to full court
-				shootingPosition = 1;
-				controllerPros.rumble("--");
+				shootingPosition = 0;
+				controllerPros.rumble(".");
 			}
 		}
 
@@ -308,7 +308,7 @@ void opcontrol()
 								 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 0.00787401574);
 					pros::delay(20);
 				}
-				intakeMotor.move_relative(1400, 200);
+				intakeMotor.move_relative(800, 200);
 
 				// wait for first ball to get shot
 				while (timeHold + 100 > pros::millis() && !(flywheelController.getActualVelocity() <= FLY_PRESETS[shootingPosition][2]))
@@ -364,7 +364,7 @@ void opcontrol()
 								 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 0.00787401574);
 					pros::delay(20);
 				}
-				intakeMotor.move_relative(1400, 200);
+				intakeMotor.move_relative(2200, 200);
 
 				// wait for first ball to get shot
 				while (timeHold + 100 > pros::millis() && !(flywheelController.getActualVelocity() <= FLY_PRESETS[shootingPosition][2]))
@@ -420,17 +420,19 @@ void opcontrol()
 							 controllerPros.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y) * 0.00787401574);
 				pros::delay(20);
 			}
-			intakeMotor.move_relative(1700, 200);
+			intakeMotor.move_relative(1400, 200);
 			// wait for first ball to get shot
 			isFlySpunUp = false;
-			pros::delay(100);
-			chassis.moveDistance(30_in);
+			chassis.moveDistance(39_in);
 
 			// shoot 2nd ball
-			intakeMotor.move_relative(1500, 200);
+			intakeMotor.move_relative(1200, 200);
+			pros::delay(10);
 			// wait for second ball to get shot
 			chassis.tank(0, 0);
 			pros::delay(50);
+			chassis.turnAngle(-20);
+			chassis.moveDistance(1_in);
 
 			// cleanup
 			ballTriggerTop = false; // we are shooting the balls so they gone

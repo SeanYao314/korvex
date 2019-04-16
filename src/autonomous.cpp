@@ -102,9 +102,9 @@ void autonomous()
     switch (auton)
     {
     case 5: // test
-        chassis.setMaxVelocity(130);
-        // chassis.turnAngle(-90_deg);
-        chassis.turnAngle(90_deg);
+        chassis.setMaxVelocity(200);
+        chassis.turnAngle(-360_deg);
+        // chassis.moveDistance(72_in);
 
         // chassis.moveDistance(72_in);
         break;
@@ -127,6 +127,7 @@ void autonomous()
         auton_red_close();
         break;
     case -2: // red full post and park only
+        auton_red_far();
         break;
     case -3: // red descore (far only)
         auton_red_descore();

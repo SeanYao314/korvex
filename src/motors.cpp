@@ -30,5 +30,5 @@ okapi::ChassisControllerPID chassis = okapi::ChassisControllerFactory::create(
     IterativePosPIDController::Gains{0.002, 0.0060, 0.000045},  // turn args
 
     AbstractMotor::gearset::green, // normal gearset
-    {4_in, 12.25_in}                // 4 inch wheels, 12.5 inch wheelbase width
+    {4.2_in, 11.956_in}                // 4 inch wheels, 12.5 inch wheelbase width
 );
