@@ -26,7 +26,7 @@ const int FLY_PRESETS[2][3] = {
 };
 const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 
-const int CAPFLIP_PRESETS[4] = {0, -500, -550, -750};
+const int CAPFLIP_PRESETS[4] = {0, -520, -550, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
 const int TRACKER_HIGH_THRESHOLD = 300;
@@ -431,8 +431,6 @@ void opcontrol()
 			// wait for second ball to get shot
 			chassis.tank(0, 0);
 			pros::delay(50);
-			chassis.turnAngle(-20);
-			chassis.moveDistance(1_in);
 
 			// cleanup
 			ballTriggerTop = false; // we are shooting the balls so they gone

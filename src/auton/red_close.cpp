@@ -6,8 +6,8 @@ using namespace okapi;
 
 void auton_red_close() {
     intakeMotor.move_velocity(200);
-    chassis.moveDistance(37_in); // going to cap with ball under it
-    chassis.moveDistanceAsync(-39.5_in);
+    chassis.moveDistance(36_in); // going to cap with ball under it
+    chassis.moveDistanceAsync(-41.625_in);
 
     // wait until we intake ball to bot
     timeHold = pros::millis();
@@ -31,7 +31,7 @@ void auton_red_close() {
     chassis.waitUntilSettled();
 
     // aim for flag
-    chassis.turnAngle(-83.5_deg);
+    chassis.turnAngle(-87.75_deg);
     chassis.moveDistance(10.5_in);
 
     // shoot first ball when ready
@@ -43,13 +43,13 @@ void auton_red_close() {
 
     // wait for first ball to get shot
     timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 445) && (timeHold + 700 > pros::millis()))
+    while (!(flywheelController.getActualVelocity() <= 435) && (timeHold + 700 > pros::millis()))
     {
         pros::delay(20);
     }
 
     // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(425);
+    flywheelController.moveVelocity(435);
 
     // wait for spinup
     pros::delay(400);
@@ -62,26 +62,26 @@ void auton_red_close() {
     flywheelController.moveVelocity(0);
 
     // flip bot flag
-    chassis.turnAngle(-7.5_deg);
+    chassis.turnAngle(-10.5_deg);
     chassis.moveDistance(50_in);
 
     // move back for scrape
-    chassis.setMaxVelocity(180);
+    chassis.setMaxVelocity(200);
     chassis.moveDistance(-51_in);
 
     // turn to scrape cap
     flywheelController.moveVelocity(500); // feed-through shot velocity
-    chassis.turnAngle(45.5_deg);
+    chassis.turnAngle(49.5_deg);
 
     // move to cap
-    chassis.moveDistance(24_in);
+    chassis.moveDistance(25_in);
 
     // scrape
-    capflipMotor.move_absolute(-545, 200);
+    capflipMotor.move_absolute(-555, 200);
     intakeMotor.move_velocity(200);
     pros::delay(200);
-    chassis.moveDistance(-10_in);
-    chassis.turnAngle(7.5_deg);
+    chassis.moveDistance(-13_in);
+    chassis.turnAngle(13.5_deg);
     capflipMotor.move_absolute(0, 200);
 
     // wait for first ball to get to top pos
@@ -112,7 +112,7 @@ void auton_red_close() {
     pros::delay(300);
 
     // second ball
-    flywheelController.moveVelocity(350);
+    flywheelController.moveVelocity(370);
     pros::delay(1500);
     intakeMotor.move_relative(1000, 200);
     pros::delay(500);

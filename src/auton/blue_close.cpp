@@ -6,8 +6,8 @@ using namespace okapi;
 
 void auton_blue_close() {
     intakeMotor.move_velocity(200);
-    chassis.moveDistance(37_in); // going to cap with ball under it
-    chassis.moveDistanceAsync(-39.5_in);
+    chassis.moveDistance(36_in); // going to cap with ball under it
+    chassis.moveDistanceAsync(-41.525_in);
 
     // wait until we intake ball to bot
     timeHold = pros::millis();
@@ -27,15 +27,15 @@ void auton_blue_close() {
     // there is now a ball in both positions
 
     // back and turn into shooting position
-    flywheelController.moveVelocity(580);
+    flywheelController.moveVelocity(560);
     chassis.waitUntilSettled();
 
     // aim for flag
-    chassis.turnAngle(83.5_deg);
+    chassis.turnAngle(88.5_deg);
     chassis.moveDistance(10.5_in);
 
     // shoot first ball when ready
-    while (!(flywheelController.getActualVelocity() > 575))
+    while (!(flywheelController.getActualVelocity() > 555))
     {
         pros::delay(20);
     }
@@ -43,13 +43,13 @@ void auton_blue_close() {
 
     // wait for first ball to get shot
     timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 450) && (timeHold + 700 > pros::millis()))
+    while (!(flywheelController.getActualVelocity() <= 435) && (timeHold + 700 > pros::millis()))
     {
         pros::delay(20);
     }
 
     // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(450);
+    flywheelController.moveVelocity(435);
 
     // wait for spinup
     pros::delay(400);
@@ -62,28 +62,27 @@ void auton_blue_close() {
     flywheelController.moveVelocity(0);
 
     // flip bot flag
-    chassis.turnAngle(7.5_deg);
+    chassis.turnAngle(10.5_deg);
     chassis.moveDistance(50_in);
 
     // move back for scrape
     chassis.setMaxVelocity(180);
-    chassis.moveDistance(-40_in);
+    chassis.moveDistance(-51_in);
 
     // turn to scrape cap
-    flywheelController.moveVelocity(550); // feed-through shot velocity
-    chassis.turnAngle(-57.5_deg);
+    flywheelController.moveVelocity(500); // feed-through shot velocity
+    chassis.turnAngle(-47.5_deg);
 
     // move to cap
-    chassis.moveDistance(12_in);
+    chassis.moveDistance(27_in);
 
     // scrape
-    capflipMotor.move_absolute(-550, 200);
+    capflipMotor.move_absolute(-545, 200);
     intakeMotor.move_velocity(200);
     pros::delay(200);
-    chassis.moveDistance(-10_in);
-    chassis.turnAngle(-17.5_deg);
+    chassis.moveDistance(-13_in);
+    chassis.turnAngle(-13.5_deg);
     capflipMotor.move_absolute(0, 200);
-    chassis.moveDistanceAsync(10_in);
 
     // wait for first ball to get to top pos
     while (!isBallTouchUpperSensor())
@@ -105,8 +104,7 @@ void auton_blue_close() {
 
     capflipMotor.move_absolute(0, 200);
     chassis.waitUntilSettled();
-    flywheelController.moveVelocity(520);
-    chassis.turnAngle(-15_deg); // aim for flags
+    flywheelController.moveVelocity(365);
 
     // shoot closest pole to red
     pros::delay(500);
@@ -114,7 +112,7 @@ void auton_blue_close() {
     pros::delay(300);
 
     // second ball
-    flywheelController.moveVelocity(550);
+    flywheelController.moveVelocity(370);
     pros::delay(1500);
     intakeMotor.move_relative(1000, 200);
     pros::delay(500);
