@@ -21,16 +21,16 @@ using namespace okapi;
 
 // 3 for 0, second, and third flag
 const int FLY_PRESETS[2][3] = {
-	{0, 560, 410}, // close
+	{0, 575, 430}, // close
 	{0, 550, 530}, // full
 };
 const int FLY_PRESETS_LEN = 2; // make sure we dont go over our set length
 
-const int CAPFLIP_PRESETS[4] = {0, -520, -550, -750};
+const int CAPFLIP_PRESETS[4] = {0, -520, -425, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
-const int TRACKER_HIGH_THRESHOLD = 300;
-const int TRACKER_LOW_THRESHOLD = 300;
+const int TRACKER_HIGH_THRESHOLD = 200;
+const int TRACKER_LOW_THRESHOLD = 250;
 
 // globals
 int flywheelTarget = 0;

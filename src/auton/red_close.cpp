@@ -4,117 +4,153 @@
 
 using namespace okapi;
 
+bool isTimeout(int target) {
+    return target < pros::millis();
+} 
+
 void auton_red_close() {
-    intakeMotor.move_velocity(200);
-    chassis.moveDistance(36_in); // going to cap with ball under it
-    chassis.moveDistanceAsync(-41.625_in);
+    chassis.setMaxVelocity(150);
+    // intakeMotor.move_velocity(200);
+    // chassis.moveDistance(36_in); // going to cap with ball under it
+    // chassis.moveDistanceAsync(-47.5_in);
 
-    // wait until we intake ball to bot
-    timeHold = pros::millis();
-    while (!isBallTouchBottomSensor())
-    {
-        pros::delay(20);
-    }
+    // // wait until we intake ball to bot
+    // timeHold = pros::millis() + 1000;
+    // while (!isBallTouchBottomSensor() && !isTimeout(timeHold))
+    // {
+    //     pros::delay(20);
+    // }
 
-    // theres a ball at the top, we want to pull it down back to the trigger
-    intakeMotor.move_relative(500, 200);
+    // // theres a ball at the top, we want to pull it down back to the trigger
+    // intakeMotor.move_relative(500, 200);
 
-    pros::delay(300);
+    // pros::delay(300);
 
-    // theres a ball at the top, we want to pull it down back to the trigger
-    intakeMotor.move_relative(-400, 200);
-    pros::delay(200);
-    // there is now a ball in both positions
+    // // theres a ball at the top, we want to pull it down back to the trigger
+    // intakeMotor.move_relative(-400, 200);
+    // pros::delay(200);
+    // // there is now a ball in both positions
 
-    // back and turn into shooting position
-    flywheelController.moveVelocity(560);
-    chassis.waitUntilSettled();
+    // // back and turn into shooting position
+    // flywheelController.moveVelocity(575);
+    // chassis.waitUntilSettled();
+
+    flywheelController.moveVelocity(555);
 
     // aim for flag
-    chassis.turnAngle(-87.75_deg);
-    chassis.moveDistance(10.5_in);
+    chassis.moveDistance(4.5_in);
+    chassis.turnAngle(-83.5_deg);
+    //chassis.moveDistance(5.5_in);
+    //chassis.turnAngle(10_deg);
 
     // shoot first ball when ready
-    while (!(flywheelController.getActualVelocity() > 555))
+    while (flywheelController.getActualVelocity() < 555)
     {
         pros::delay(20);
     }
-    intakeMotor.move_relative(1000, 200);
+    intakeMotor.move_relative(700, 200);
 
-    // wait for first ball to get shot
-    timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 435) && (timeHold + 700 > pros::millis()))
+   // wait for first ball to get shot
+    timeHold = pros::millis() + 200;
+    while (!(flywheelController.getActualVelocity() <= 480) && !isTimeout(timeHold))
     {
         pros::delay(20);
     }
 
-    // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(435);
+    pros::delay(500);
 
-    // wait for spinup
-    pros::delay(400);
+    //quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
+    flywheelController.moveVelocity(480);
+    timeHold = pros::millis() + 700;
+    while (flywheelController.getActualVelocity() >= 480 && !isTimeout(timeHold))
+    {
+        pros::delay(20);
+    }
 
-    // shoot 2nd ball
     intakeMotor.move_relative(1200, 200);
     // wait for second ball to get shot
     pros::delay(400);
-    chassis.setMaxVelocity(150);
-    flywheelController.moveVelocity(0);
+    
+    chassis.setMaxVelocity(200);
+     chassis.turnAngle(-7.5_deg);
+    chassis.moveDistanceAsync(50_in);
+
+    // // wait for spinup
+    // pros::delay(600);
+
+    // // shoot 2nd ball
+    // intakeMotor.move_relative(1200, 200);
+    // // wait for second ball to get shot
+    // pros::delay(400);
+    // //chassis.setMaxVelocity(150);
+    // flywheelController.moveVelocity(0);
 
     // flip bot flag
-    chassis.turnAngle(-10.5_deg);
-    chassis.moveDistance(50_in);
+    // chassis.turnAngle(-17.5_deg);
+    // chassis.moveDistance(50_in);
 
-    // move back for scrape
-    chassis.setMaxVelocity(200);
-    chassis.moveDistance(-51_in);
+    // chassis.waitUntilSettled();
 
-    // turn to scrape cap
-    flywheelController.moveVelocity(500); // feed-through shot velocity
-    chassis.turnAngle(49.5_deg);
+    // chassis.turnAngle(-15_deg);
+    // chassis.moveDistance(27_in);
 
-    // move to cap
-    chassis.moveDistance(25_in);
+    // // move back for scrape
+    // chassis.setMaxVelocity(200);
+    // chassis.moveDistance(-30_in);
 
-    // scrape
-    capflipMotor.move_absolute(-555, 200);
-    intakeMotor.move_velocity(200);
-    pros::delay(200);
-    chassis.moveDistance(-13_in);
-    chassis.turnAngle(13.5_deg);
-    capflipMotor.move_absolute(0, 200);
+    // chassis.turnAngle(-90_deg);
+    // chassis.moveDistance(15_in);
 
-    // wait for first ball to get to top pos
-    while (!isBallTouchUpperSensor())
-    {
-        pros::delay(20);
-    }
+    // chassis.moveDistance(-60_in);
+    // chassis.turnAngle(90_deg);
+    // chassis.moveDistance(30_in);
 
-    // wait for second ball to get to bot pos
-    timeHold = pros::millis();
-    while (!isBallTouchBottomSensor() && (timeHold + 5000 > pros::millis()))
-    {
-        pros::delay(20);
-    }
+    // // turn to scrape cap
+    // flywheelController.moveVelocity(500); // feed-through shot velocity
+    // chassis.turnAngle(49.5_deg);
 
-    // we got a second ball, let it pull up a bit
-    intakeMotor.move_relative(400, 200);
-    pros::delay(500);
-    intakeMotor.move_relative(-500, 200);
+    // // move to cap
+    // chassis.moveDistance(25_in);
 
-    capflipMotor.move_absolute(0, 200);
-    chassis.waitUntilSettled();
-    flywheelController.moveVelocity(365);
+    // // scrape
+    // capflipMotor.move_absolute(-555, 200);
+    // intakeMotor.move_velocity(200);
+    // pros::delay(200);
+    // chassis.moveDistance(-13_in);
+    // chassis.turnAngle(13.5_deg);
+    // capflipMotor.move_absolute(0, 200);
 
-    // shoot closest pole to red
-    pros::delay(500);
-    intakeMotor.move_relative(1500, 200);
-    pros::delay(300);
+    // // wait for first ball to get to top pos
+    // while (!isBallTouchUpperSensor())
+    // {
+    //     pros::delay(20);
+    // }
 
-    // second ball
-    flywheelController.moveVelocity(370);
-    pros::delay(1500);
-    intakeMotor.move_relative(1000, 200);
-    pros::delay(500);
-    flywheelController.moveVelocity(0);
+    // // wait for second ball to get to bot pos
+    // timeHold = pros::millis();
+    // while (!isBallTouchBottomSensor() && (timeHold + 5000 > pros::millis()))
+    // {
+    //     pros::delay(20);
+    // }
+
+    // // we got a second ball, let it pull up a bit
+    // intakeMotor.move_relative(400, 200);
+    // pros::delay(500);
+    // intakeMotor.move_relative(-500, 200);
+
+    // capflipMotor.move_absolute(0, 200);
+    // chassis.waitUntilSettled();
+    // flywheelController.moveVelocity(365);
+
+    // // shoot closest pole to red
+    // pros::delay(500);
+    // intakeMotor.move_relative(1500, 200);
+    // pros::delay(300);
+
+    // // second ball
+    // flywheelController.moveVelocity(370);
+    // pros::delay(1500);
+    // intakeMotor.move_relative(1000, 200);
+    // pros::delay(500);
+    // flywheelController.moveVelocity(0);
 }

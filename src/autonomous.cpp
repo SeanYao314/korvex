@@ -21,9 +21,9 @@ void gyroTurn(int target, int timeoutVal)
 {
 
     // tune vals
-    float kP = 0.002;
-    float kI = 0.005;
-    float kD = 0.0004;
+    float kP = 0.000;
+    float kI = 0.000;
+    float kD = 0.0000;
     int iDeadband = 400; // 0 for disable
     int tolerance = 0;
 
@@ -102,11 +102,13 @@ void autonomous()
     switch (auton)
     {
     case 5: // test
-        chassis.setMaxVelocity(200);
-        chassis.turnAngle(-360_deg);
+        //chassis.setMaxVelocity(150);
+        //chassis.moveDistance(96_in);
         // chassis.moveDistance(72_in);
 
         // chassis.moveDistance(72_in);
+
+        chassis.turnAngle(90_deg);
         break;
     case 0: // skills 18
         auton_skill_route_1();

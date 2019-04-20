@@ -30,7 +30,7 @@ void auton_red_far() {
     chassis.waitUntilSettled();
 
     // aim for flag
-    chassis.turnAngle(-90.75_deg);
+    chassis.turnAngle(-88.75_deg);
 
     // shoot first ball when ready
     while (!(flywheelController.getActualVelocity() > 500))
@@ -61,12 +61,13 @@ void auton_red_far() {
 
     pros::delay(500);
     chassis.turnAngle(86.5_deg);
-    chassis.moveDistance(-14_in);
+    chassis.moveDistance(-16_in);
 
     
     chassis.turnAngle(-90_deg);
     intakeMotor.move_velocity(200);
-    capflipMotor.move_absolute(535, 200);
+    chassis.moveDistance(5_in);
+    capflipMotor.move_absolute(-555, 200);
     pros::delay(300);
     chassis.moveDistance(-5_in);
      // wait until we intake ball to bot
