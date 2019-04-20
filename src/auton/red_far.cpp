@@ -5,8 +5,10 @@
 using namespace okapi;
 
 void auton_red_far() {
+    chassis.setMaxVelocity(150);
     intakeMotor.move_velocity(200);
-    chassis.moveDistance(37.25_in); // going to cap with ball under it
+    chassis.moveDistance(37.15_in); // going to cap with ball under it
+    chassis.moveDistanceAsync(-5_in);
 
     // wait until we intake ball to bot
     timeHold = pros::millis();
@@ -30,7 +32,15 @@ void auton_red_far() {
     chassis.waitUntilSettled();
 
     // aim for flag
-    chassis.turnAngle(-88.75_deg);
+    chassis.turnAngle(-90.00_deg);
+
+    chassis.forward(50);
+    pros::delay(300);
+    chassis.stop();
+
+    // chassis.moveDistance(5_in);
+    chassis.moveDistance(-9_in);
+    chassis.turnAngle(27_deg);
 
     // shoot first ball when ready
     while (!(flywheelController.getActualVelocity() > 500))
@@ -59,48 +69,48 @@ void auton_red_far() {
     chassis.setMaxVelocity(200);
     flywheelController.moveVelocity(0);
 
-    pros::delay(500);
-    chassis.turnAngle(86.5_deg);
-    chassis.moveDistance(-16_in);
+    // pros::delay(500);
+    // chassis.turnAngle(86.5_deg);
+    // chassis.moveDistance(-11_in);
 
     
-    chassis.turnAngle(-90_deg);
-    intakeMotor.move_velocity(200);
-    chassis.moveDistance(5_in);
-    capflipMotor.move_absolute(-555, 200);
-    pros::delay(300);
-    chassis.moveDistance(-5_in);
-     // wait until we intake ball to bot
-    timeHold = pros::millis();
-    while (!isBallTouchBottomSensor())
-    {
-        pros::delay(20);
-    }
+    // chassis.turnAngle(-90_deg);
+    // intakeMotor.move_velocity(200);
+    // chassis.moveDistance(5_in);
+    // capflipMotor.move_absolute(-555, 200);
+    // pros::delay(300);
+    // chassis.moveDistance(-5_in);
+    //  // wait until we intake ball to bot
+    // timeHold = pros::millis();
+    // while (!isBallTouchBottomSensor())
+    // {
+    //     pros::delay(20);
+    // }
 
-    // theres a ball at the top, we want to pull it down back to the trigger
-    intakeMotor.move_relative(500, 200);
+    // // theres a ball at the top, we want to pull it down back to the trigger
+    // intakeMotor.move_relative(500, 200);
 
-    pros::delay(300);
+    // pros::delay(300);
 
-    // theres a ball at the top, we want to pull it down back to the trigger
-    intakeMotor.move_relative(-400, 200);
-    pros::delay(200);
-    // there is now a ball in both positions
+    // // theres a ball at the top, we want to pull it down back to the trigger
+    // intakeMotor.move_relative(-400, 200);
+    // pros::delay(200);
+    // // there is now a ball in both positions
 
-    // back and turn into shooting position
-    flywheelController.moveVelocity(550);
-    chassis.waitUntilSettled();
-    chassis.turnAngle(45_deg);
-    while (!(flywheelController.getActualVelocity() > 500))
-    {
-        pros::delay(20);
-    }
-    intakeMotor.move_relative(1000, 200);
+    // // back and turn into shooting position
+    // flywheelController.moveVelocity(550);
+    // chassis.waitUntilSettled();
+    // chassis.turnAngle(45_deg);
+    // while (!(flywheelController.getActualVelocity() > 500))
+    // {
+    //     pros::delay(20);
+    // }
+    // intakeMotor.move_relative(3000, 200);
+    // pros::delay(1000);
+    // chassis.turnAngle(-45_deg);
+    // chassis.moveDistance(6_in);
 
-    chassis.turnAngle(-135_deg);
-    chassis.moveDistance(6);
-
-    chassis.moveDistance(48_in);
+    chassis.moveDistance(68_in);
 
 
         

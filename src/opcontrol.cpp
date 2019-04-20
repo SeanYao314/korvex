@@ -30,7 +30,7 @@ const int CAPFLIP_PRESETS[4] = {0, -520, -425, -750};
 const int CAPFLIP_PRESETS_LEN = 3;
 
 const int TRACKER_HIGH_THRESHOLD = 200;
-const int TRACKER_LOW_THRESHOLD = 250;
+const int TRACKER_LOW_THRESHOLD = 300;
 
 // globals
 int flywheelTarget = 0;
