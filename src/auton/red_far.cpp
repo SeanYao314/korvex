@@ -43,7 +43,7 @@ void auton_red_far() {
     chassis.setMaxVelocity(150);
     chassis.moveDistance(-6_in);
 
-    chassis.turnAngle(26.2363514159_deg);
+    chassis.turnAngle(26.1363514159_deg);
 
     // shoot first ball when ready
     while (!(flywheelController.getActualVelocity() > 550))
@@ -54,13 +54,13 @@ void auton_red_far() {
 
     // wait for first ball to get shot
     timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 475) && (timeHold + 700 > pros::millis()))
+    while (!(flywheelController.getActualVelocity() <= 470) && (timeHold + 700 > pros::millis()))
     {
         pros::delay(20);
     }
 
     // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(475);
+    flywheelController.moveVelocity(470);
 
     // wait for spinup
     pros::delay(400);
