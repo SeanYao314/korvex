@@ -7,8 +7,8 @@ using namespace okapi;
 void auton_red_far() {
     chassis.setMaxVelocity(150);
     intakeMotor.move_velocity(200);
-    chassis.moveDistance(37.15_in); // going to cap with ball under it
-    chassis.moveDistanceAsync(-5_in);
+    chassis.moveDistance(36.15_in); // going to cap with ball under it
+    chassis.moveDistanceAsync(-20_in);
 
     // wait until we intake ball to bot
     timeHold = pros::millis();
@@ -28,22 +28,25 @@ void auton_red_far() {
     // there is now a ball in both positions
 
     // back and turn into shooting position
-    flywheelController.moveVelocity(500);
+    flywheelController.moveVelocity(550);
     chassis.waitUntilSettled();
 
     // aim for flag
+    chassis.moveDistance(12_in);
     chassis.turnAngle(-90.00_deg);
 
-    chassis.forward(50);
-    pros::delay(300);
+    chassis.setMaxVelocity(75);
+    chassis.forward(10);
+    pros::delay(600);
     chassis.stop();
 
-    // chassis.moveDistance(5_in);
-    chassis.moveDistance(-9_in);
-    chassis.turnAngle(27_deg);
+    chassis.setMaxVelocity(150);
+    chassis.moveDistance(-6_in);
+
+    chassis.turnAngle(26.2363514159_deg);
 
     // shoot first ball when ready
-    while (!(flywheelController.getActualVelocity() > 500))
+    while (!(flywheelController.getActualVelocity() > 550))
     {
         pros::delay(20);
     }
@@ -51,13 +54,13 @@ void auton_red_far() {
 
     // wait for first ball to get shot
     timeHold = pros::millis();
-    while (!(flywheelController.getActualVelocity() <= 470) && (timeHold + 700 > pros::millis()))
+    while (!(flywheelController.getActualVelocity() <= 475) && (timeHold + 700 > pros::millis()))
     {
         pros::delay(20);
     }
 
     // quick switch to mid flag, so when flywheel power lowers cuz of stress of launch, we can use the decel to improve speed
-    flywheelController.moveVelocity(470);
+    flywheelController.moveVelocity(475);
 
     // wait for spinup
     pros::delay(400);
@@ -110,8 +113,8 @@ void auton_red_far() {
     // chassis.turnAngle(-45_deg);
     // chassis.moveDistance(6_in);
 
-    chassis.moveDistance(68_in);
-
+    intakeMotor.move_velocity(200);
+    chassis.moveDistance(40_in);
 
         
 }

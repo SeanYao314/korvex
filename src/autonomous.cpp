@@ -108,7 +108,7 @@ void autonomous()
 
         // chassis.moveDistance(72_in);
 
-        chassis.turnAngle(90_deg);
+        auton_red_far();
         break;
     case 0: // skills 18
         auton_skill_route_1();
