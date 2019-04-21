@@ -108,7 +108,14 @@ void autonomous()
 
         // chassis.moveDistance(72_in);
 
-        auton_red_far();
+        //auton_red_descore();
+        flywheelController.moveVelocity(530);
+        while (!(flywheelController.getActualVelocity() > 530))
+        {
+            pros::delay(20);
+        }
+    intakeMotor.move_relative(1000, 200);
+
         break;
     case 0: // skills 18
         auton_skill_route_1();
