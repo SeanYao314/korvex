@@ -67,7 +67,7 @@ void isFlySpunUpCheck(void *)
 		pros::delay(50);
 	}
 }
-
+int previous_accelerometer_value = 0;
 void opcontrol()
 {
 
@@ -97,6 +97,14 @@ void opcontrol()
 
 	while (true)
 	{
+		int current_value = accelo_x.get_value();
+		if (previous_accelerometer_value != 0) {
+			int delta = current_value - previous_accelerometer_value;
+			if (abs(delta) > 10) {
+				printf("current accelerometer value is %d, delta is %d\n", current_value, delta);
+			}
+		}
+		previous_accelerometer_value = current_value;
 
 		// capflip control
 		if (controllerPros.get_digital_new_press(DIGITAL_RIGHT)) // new cycle press, go to next preset

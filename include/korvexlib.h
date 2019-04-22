@@ -24,6 +24,9 @@ const int TRIGGER_BL = 1;
 const int TRIGGER_BR = 2;
 const int TRIGGER_TL = 3;
 const int TRIGGER_TR = 4;
+
+const int ACCELO_X = 8;
+
 //vision
 // auton
 extern int autonSelection;
@@ -53,3 +56,7 @@ extern pros::ADIDigitalIn triggerTR;
 extern okapi::ChassisControllerPID chassis;
 extern okapi::IterativePosPIDController liftControllerPID;
 extern okapi::ADIGyro gyro;
+
+extern pros::ADIAccelerometer accelo_x;
+
+bool isRearBumped();

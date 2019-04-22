@@ -86,6 +86,30 @@ void gyroTurn(int target, int timeoutVal)
 
     }
 }*/
+
+int accelerometer_value_x = 0;
+
+bool isRearBumped() {
+    int delta = 0;
+    bool bumped = false;
+    int accelerometter_value_current = accelo_x.get_value();
+    if (accelerometer_value_x != 0) {
+        delta = accelerometter_value_current - accelerometer_value_x;
+        bool isMovingBack = delta > 0;
+        if (isMovingBack) {
+            if (abs(delta) > 50) {
+                bumped = true;
+            }
+        } 
+    }
+    accelerometer_value_x = accelerometter_value_current;
+    return bumped;
+}
+
+bool isFrontBumped() {
+    return false;
+}
+
 void autonomous()
 {
     int autonStart = pros::millis(); // note the start time
@@ -100,11 +124,22 @@ void autonomous()
     switch (auton)
     {
     case 5: // test
-        chassis.setMaxVelocity(130);
-        // chassis.turnAngle(-90_deg);
-        // chassis.turnAngle(90_deg);
+        // chassis.setMaxVelocity(130);
+        // // chassis.turnAngle(-90_deg);
+        // // chassis.turnAngle(90_deg);
         
-        chassis.moveDistance(72_in);
+        // chassis.moveDistance(72_in);
+
+        chassis.forward(-50);
+        while (!isRearBumped()) {
+            pros::delay(20);
+        }
+        chassis.stop();
+        // pros::delay(100);
+        chassis.forward(-50);
+        pros::delay(100);
+        chassis.stop();
+
         break;
     case 0: // skills 18
         chassis.setMaxVelocity(130);
